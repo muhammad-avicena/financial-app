@@ -36,4 +36,16 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error deleting transaction:", error);
         }
     }));
+    // Get the elements
+    const logOutButton = document.getElementById("logOutData");
+    const logOutModal = document.getElementById("logOutModal");
+    // Add an event listener to the delete button
+    logOutButton.addEventListener("click", () => {
+        // Delete local storage data
+        localStorage.clear();
+        // Close the logout modal
+        logOutModal.classList.add("hidden");
+        // Redirect to index.html
+        window.location.href = "index.html";
+    });
 });

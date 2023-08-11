@@ -135,9 +135,6 @@ async function fetchTransactionData() {
             );
             deleteModal.setAttribute("aria-modal", "true");
             deleteModal.setAttribute("role", "dialog");
-
-            // Show the modal and apply the correct classes
-
             deleteModal.classList.remove("hidden");
             deleteModal.classList.add("fixed", "inset-0", "md:inset-0"); 
             deleteModal.removeAttribute("aria-hidden");

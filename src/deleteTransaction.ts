@@ -6,15 +6,18 @@ document.addEventListener("DOMContentLoaded", () => {
     "deleteData"
   ) as HTMLButtonElement;
 
-    buttonSubmit.addEventListener("click", async (event) => {
-      event.preventDefault();
+  buttonSubmit.addEventListener("click", async (event) => {
+    event.preventDefault();
     try {
-      const response = await fetch(`https://financial-api.avicena.dev/api/transaction/1`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `https://financial-api.avicena.dev/api/transaction/1`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -29,5 +32,21 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       console.error("Error deleting transaction:", error);
     }
+  });
+
+  // Get the elements
+  const logOutButton:any = document.getElementById("logOutData");
+  const logOutModal:any = document.getElementById("logOutModal");
+
+  // Add an event listener to the delete button
+  logOutButton.addEventListener("click", () => {
+    // Delete local storage data
+    localStorage.clear();
+
+    // Close the logout modal
+    logOutModal.classList.add("hidden");
+
+    // Redirect to index.html
+    window.location.href = "index.html";
   });
 });
