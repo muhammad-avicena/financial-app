@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5001/api/transaction", {
+      const response = await fetch("https://financial-api.avicena.dev/api/transaction", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

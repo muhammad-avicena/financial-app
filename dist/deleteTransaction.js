@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     buttonSubmit.addEventListener("click", (event) => __awaiter(void 0, void 0, void 0, function* () {
         event.preventDefault();
         try {
-            const response = yield fetch(`http://localhost:5001/api/transaction/1`, {
+            const response = yield fetch(`https://financial-api.avicena.dev/api/transaction/1`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

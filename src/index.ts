@@ -3,7 +3,7 @@ async function fetchUserData() {
         const localStorageData: string | null = localStorage.getItem('userData');
         const dataUser = JSON.parse(localStorageData || '{}');
 
-        const getUserById = `http://localhost:5001/api/user/${dataUser.id}`;
+        const getUserById = `https://financial-api.avicena.dev/api/user/${dataUser.id}`;
 
         const response = await fetch(getUserById);
         const apiData = await response.json();

@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(formData);
   
       try {
-        const response = await fetch(`http://localhost:5001/api/user/${id}`, {
+        const response = await fetch(`https://financial-api.avicena.dev/api/user/${id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",

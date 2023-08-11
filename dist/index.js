@@ -13,7 +13,7 @@ function fetchUserData() {
         try {
             const localStorageData = localStorage.getItem('userData');
             const dataUser = JSON.parse(localStorageData || '{}');
-            const getUserById = `http://localhost:5001/api/user/${dataUser.id}`;
+            const getUserById = `https://financial-api.avicena.dev/api/user/${dataUser.id}`;
             const response = yield fetch(getUserById);
             const apiData = yield response.json();
             console.log(apiData);

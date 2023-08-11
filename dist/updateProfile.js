@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const { id } = dataUser;
     const successSpan = document.getElementById("updateUserSuccess");
     const form = document.getElementById("profileForm");
-    const endpoint = `http://localhost:5001/api/user/${id}`;
+    const endpoint = `https://financial-api.avicena.dev/api/user/${id}`;
     function fetchUserData(endpoint) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         console.log(formData);
         try {
-            const response = yield fetch(`http://localhost:5001/api/user/${id}`, {
+            const response = yield fetch(`https://financial-api.avicena.dev/api/user/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

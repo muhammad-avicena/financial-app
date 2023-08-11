@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
             productPrice: parseInt(document.getElementById("productPrice").value),
         };
         try {
-            const response = yield fetch("http://localhost:5001/api/transaction", {
+            const response = yield fetch("https://financial-api.avicena.dev/api/transaction", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
