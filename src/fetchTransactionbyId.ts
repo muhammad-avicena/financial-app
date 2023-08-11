@@ -79,12 +79,12 @@ async function fetchTransactionData() {
         editButton.type = "button";
         editButton.setAttribute("data-modal-target", "updateProductModal");
         editButton.setAttribute("data-modal-toggle", "updateProductModal");
-        editButton.setAttribute(
-          "data-transaction-id",
-          transaction.transactionId
-          );
+        // editButton.setAttribute(
+        //   "data-transaction-id",
+        //   transaction.transactionId
+        //   );
           
-          console.log("id-button :",transaction.transactionId)
+        //   console.log("id-button :",transaction.transactionId)
         editButton.className =
           "flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200";
         editButton.innerHTML =
