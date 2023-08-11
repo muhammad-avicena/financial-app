@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
             productQuantity: parseInt(document.getElementById("productQuantity").value),
             productPrice: parseInt(document.getElementById("productPrice").value),
         };
-        console.log(formData);
         try {
             const response = yield fetch("http://localhost:5001/api/transaction", {
                 method: "POST",

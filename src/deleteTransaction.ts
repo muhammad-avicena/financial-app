@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     buttonSubmit.addEventListener("click", async (event) => {
       event.preventDefault();
     try {
-      const response = await fetch(`https://financial-api.avicena.dev/api/transaction/3`, {
+      const response = await fetch(`http://localhost:5001/api/transaction/1`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

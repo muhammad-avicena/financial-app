@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         console.log(formData);
         try {
-            const response = yield fetch(`https://financial-api.avicena.dev/api/transaction/1`, {
+            const response = yield fetch(`http://localhost:5001/api/transaction/1`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

@@ -104,7 +104,7 @@
                 <path clip-rule="evenodd" fill-rule="evenodd"
                   d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
               </svg>
-              Create product
+              Create Transaction
             </button>
             <div class="flex items-center space-x-3 w-full md:w-auto">
               <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown"
@@ -310,7 +310,7 @@
                 Name</label>
               <input type="text" name="productName" id="productNameUpdate" value=""
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="" />
+                placeholder="Coklat" />
             </div>
             <div>
               <label for="productQuantity" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product
@@ -342,16 +342,6 @@
             <span id="transactionSuccessUpdate" class="px-3 text-green-500"></span>
           </div>
         </form>
-        <script>
-          const localStorageData = localStorage.getItem('userData');
-          const dataUser = JSON.parse(localStorageData || '{}');
-          const { userName } = dataUser;
-
-          console.log(dataUser)
-
-          const productNameInput = document.getElementById("productNameUpdate");
-          productNameInput.placeholder = userName;
-        </script>
       </div>
     </div>
   </div>
@@ -549,7 +539,7 @@
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
               <input type="text" name="usernameUpdate" id="usernameUpdate"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="Joko Susanto" required="" />
+                placeholder="" required="" />
             </div>
             <!-- <div>
               <label for="updateBalance" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email

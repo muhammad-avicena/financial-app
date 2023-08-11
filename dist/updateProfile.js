@@ -15,6 +15,33 @@ document.addEventListener("DOMContentLoaded", () => {
     const { id } = dataUser;
     const successSpan = document.getElementById("updateUserSuccess");
     const form = document.getElementById("profileForm");
+    const endpoint = `http://localhost:5001/api/user/${id}`;
+    function fetchUserData(endpoint) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const response = yield fetch(endpoint);
+                const data = yield response.json();
+                return data.user.username;
+            }
+            catch (error) {
+                console.error("Error fetching user data:", error);
+                throw error;
+            }
+        });
+    }
+    function updateUsernamePlaceholder() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const userData = yield fetchUserData(endpoint);
+                const usernameInput = document.getElementById("usernameUpdate");
+                usernameInput.placeholder = userData;
+            }
+            catch (error) {
+                console.error("Error updating username placeholder:", error);
+            }
+        });
+    }
+    updateUsernamePlaceholder();
     form.addEventListener("submit", (event) => __awaiter(void 0, void 0, void 0, function* () {
         event.preventDefault();
         const username = document.getElementById("usernameUpdate").value;

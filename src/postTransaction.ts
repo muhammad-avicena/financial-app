@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
       ),
     };
 
-    console.log(formData);
     try {
       const response = await fetch("http://localhost:5001/api/transaction", {
         method: "POST",

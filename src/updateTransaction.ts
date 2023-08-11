@@ -31,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     const productPrice = parseInt(
       (document.getElementById("productPriceUpdate") as HTMLInputElement).value
-    );
-
+      );
+    
     const formData = {
       userId: id,
       productName: productName,
@@ -42,27 +42,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log(formData);
 
-    try {
-      const response = await fetch(`https://financial-api.avicena.dev/api/transaction/1`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      try {
+          const response = await fetch(`http://localhost:5001/api/transaction/1`, {
+              method: "PUT",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+          });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Product updated:", data);
-        successSpan.textContent = "Transaction updated successfully!";
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-      } else {
-        console.error("Error updating product:", response.statusText);
+          if (response.ok) {
+              const data = await response.json();
+              console.log("Product updated:", data);
+              successSpan.textContent = "Transaction updated successfully!";
+              setTimeout(() => {
+                  window.location.reload();
+              }, 2000);
+          } else {
+              console.error("Error updating product:", response.statusText);
+          }
+      } catch (error) {
+          console.error("Error updating product:", error);
       }
-    } catch (error) {
-      console.error("Error updating product:", error);
-    }
   });
 });
