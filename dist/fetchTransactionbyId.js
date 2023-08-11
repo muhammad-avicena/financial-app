@@ -18,7 +18,7 @@ function fetchTransactionData() {
             const dataAPI = yield response.json();
             console.log(dataAPI.transactions);
             console.log("Type of transactions:", Array.isArray(dataAPI));
-            const tbody = document.querySelector("tbody");
+            const tbody = document.querySelector("#dataTable");
             if (tbody) {
                 dataAPI.transactions.forEach((transaction) => {
                     const row = document.createElement("tr");
@@ -39,53 +39,57 @@ function fetchTransactionData() {
                     const actionsCell = document.createElement("td");
                     actionsCell.className = "px-4 py-3 flex items-center justify-end";
                     const dropdownButton = document.createElement("button");
-                    dropdownButton.id = `apple-imac-27-dropdown-button`;
-                    dropdownButton.setAttribute("data-dropdown-toggle", `apple-imac-27-dropdown`);
                     dropdownButton.className = `inline-flex items-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 p-1.5 dark:hover-bg-gray-800 text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100`;
                     dropdownButton.type = `button`;
-                    const svgIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                    svgIcon.setAttribute("class", "w-5 h-5");
-                    svgIcon.setAttribute("aria-hidden", "true");
-                    svgIcon.setAttribute("fill", "currentColor");
-                    svgIcon.setAttribute("viewbox", "0 0 20 20");
-                    svgIcon.innerHTML = `<path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />`;
-                    dropdownButton.appendChild(svgIcon);
                     const dropdownContent = document.createElement("div");
-                    dropdownContent.id = `apple-imac-27-dropdown`;
-                    dropdownContent.className = `hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600`;
+                    dropdownContent.className = ` z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600`;
                     const ul = document.createElement("ul");
                     ul.className = `py-1 text-sm`;
-                    ul.setAttribute("aria-labelledby", `apple-imac-27-dropdown-button`);
                     const editLi = document.createElement("li");
                     const editButton = document.createElement("button");
                     editButton.type = "button";
-                    editButton.setAttribute("data-modal-target", "updateProductModal");
-                    editButton.setAttribute("data-modal-toggle", "updateProductModal");
-                    editButton.setAttribute("data-transaction-id", transaction.transactionId);
-                    console.log("id-button :", transaction.transactionId);
+                    editButton.addEventListener("click", () => {
+                        // Add your edit button logic here, such as opening a modal or performing an action
+                        const updateProductModal = document.getElementById("updateProductModal");
+                        updateProductModal.setAttribute("data-modal-toggle", "updateProductModal");
+                        if (updateProductModal) {
+                            updateProductModal.classList.add("overflow-y-auto", "overflow-x-hidden", "fixed", "top-0", "right-0", "left-0", "z-50", "justify-center", "items-center", "w-full", "md:inset-0", "h-[calc(100%-1rem)]", "max-h-full", "inset-0", "flex");
+                            updateProductModal.setAttribute("aria-modal", "true");
+                            updateProductModal.setAttribute("role", "dialog");
+                            // Show the modal and apply the correct classes
+                            updateProductModal.classList.remove("hidden");
+                            updateProductModal.classList.add("fixed", "inset-0", "md:inset-0"); // Add md:inset-0 class
+                            updateProductModal.removeAttribute("aria-hidden");
+                            document.body.classList.add("overflow-hidden"); // Prevent scrolling when the modal is open
+                        }
+                    });
                     editButton.className =
                         "flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200";
                     editButton.innerHTML =
                         '<svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" /><path fill-rule="evenodd" clip-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>Edit';
                     editLi.appendChild(editButton);
                     ul.appendChild(editLi);
-                    const previewLi = document.createElement("li");
-                    const previewButton = document.createElement("button");
-                    previewButton.type = "button";
-                    previewButton.setAttribute("data-modal-target", "readProductModal");
-                    previewButton.setAttribute("data-modal-toggle", "readProductModal");
-                    previewButton.className =
-                        "flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200";
-                    previewButton.innerHTML =
-                        '<svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z" /><path fill-rule="evenodd" clip-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" /></svg>Preview';
-                    previewLi.appendChild(previewButton);
-                    ul.appendChild(previewLi);
                     // Create the "Delete" button
                     const deleteLi = document.createElement("li");
                     const deleteButton = document.createElement("button");
                     deleteButton.type = "button";
                     deleteButton.setAttribute("data-modal-target", "deleteModal");
                     deleteButton.setAttribute("data-modal-toggle", "deleteModal");
+                    deleteButton.addEventListener("click", () => {
+                        // Add your edit button logic here, such as opening a modal or performing an action
+                        const deleteModal = document.getElementById("deleteModal");
+                        deleteModal.setAttribute("data-modal-toggle", "updateProductModal");
+                        if (deleteModal) {
+                            deleteModal.classList.add("overflow-y-auto", "overflow-x-hidden", "fixed", "top-0", "right-0", "left-0", "z-50", "justify-center", "items-center", "w-full", "md:inset-0", "h-[calc(100%-1rem)]", "max-h-full", "inset-0", "flex");
+                            deleteModal.setAttribute("aria-modal", "true");
+                            deleteModal.setAttribute("role", "dialog");
+                            // Show the modal and apply the correct classes
+                            deleteModal.classList.remove("hidden");
+                            deleteModal.classList.add("fixed", "inset-0", "md:inset-0");
+                            deleteModal.removeAttribute("aria-hidden");
+                            document.body.classList.add("overflow-hidden");
+                        }
+                    });
                     deleteButton.className =
                         "flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-500 dark:hover:text-red-400";
                     deleteButton.innerHTML =
