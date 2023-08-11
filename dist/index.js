@@ -1,38 +1,34 @@
 "use strict";
-// const submit = document.getElementById("signinButton");
-//               submit.on("click", (e) => {
-//                 e.preventDefault();
-//                 const username = document.getElementById("username").value;
-//                 const password = document.getElementById("password").value;
-//                 const loginData = {
-//                   username: username,
-//                   password: password,
-//                 };
-//                 fetch("https://financial-app.avicena.dev/api/auth/login", {
-//                   method: "POST",
-//                   headers: {
-//                     "Content-Type": "application/json",
-//                   },
-//                   body: JSON.stringify(loginData),
-//                 })
-//                   .then((response) => response.json())
-//                   .then((data) => {
-//                     // Handle the response from the API
-//                     console.log(data); // You can process the data here
-//                     Swal.fire({
-//                       title: "Success Logged in",
-//                       text: "You have successfully logged in.",
-//                       icon: "success",
-//                       confirmButtonText: "OK",
-//                     });
-//                   })
-//                   .catch((error) => {
-//                     console.error("Error:", error);
-//                     Swal.fire({
-//                       title: "Wrong Credentials!",
-//                       text: "Email/passwords are incorrect, please try again.",
-//                       icon: "failed",
-//                       confirmButtonText: "OK",
-//                     });
-//                   });
-//               });
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+function fetchUserData() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const localStorageData = localStorage.getItem('userData');
+            const dataUser = JSON.parse(localStorageData || '{}');
+            const getUserById = `https://financial-api.avicena.dev/api/user/${dataUser.id}`;
+            const response = yield fetch(getUserById);
+            const apiData = yield response.json();
+            console.log(apiData);
+            const userSpan = document.getElementById('user');
+            if (userSpan) {
+                userSpan.textContent = apiData.user.username || 'Anonymous';
+            }
+            const balanceSpan = document.getElementById('balance');
+            if (balanceSpan) {
+                balanceSpan.textContent = apiData.user.balance || '0';
+            }
+        }
+        catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+}
+fetchUserData();

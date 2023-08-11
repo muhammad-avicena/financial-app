@@ -1,40 +1,26 @@
-// const submit = document.getElementById("signinButton");
+async function fetchUserData() {
+    try {
+        const localStorageData: string | null = localStorage.getItem('userData');
+        const dataUser = JSON.parse(localStorageData || '{}');
 
-//               submit.on("click", (e) => {
-//                 e.preventDefault();
-//                 const username = document.getElementById("username").value;
-//                 const password = document.getElementById("password").value;
+        const getUserById = `https://financial-api.avicena.dev/api/user/${dataUser.id}`;
 
-//                 const loginData = {
-//                   username: username,
-//                   password: password,
-//                 };
+        const response = await fetch(getUserById);
+        const apiData = await response.json();
+        console.log(apiData);
 
-//                 fetch("https://financial-app.avicena.dev/api/auth/login", {
-//                   method: "POST",
-//                   headers: {
-//                     "Content-Type": "application/json",
-//                   },
-//                   body: JSON.stringify(loginData),
-//                 })
-//                   .then((response) => response.json())
-//                   .then((data) => {
-//                     // Handle the response from the API
-//                     console.log(data); // You can process the data here
-//                     Swal.fire({
-//                       title: "Success Logged in",
-//                       text: "You have successfully logged in.",
-//                       icon: "success",
-//                       confirmButtonText: "OK",
-//                     });
-//                   })
-//                   .catch((error) => {
-//                     console.error("Error:", error);
-//                     Swal.fire({
-//                       title: "Wrong Credentials!",
-//                       text: "Email/passwords are incorrect, please try again.",
-//                       icon: "failed",
-//                       confirmButtonText: "OK",
-//                     });
-//                   });
-//               });
+        const userSpan = document.getElementById('user');
+        if (userSpan) {
+            userSpan.textContent = apiData.user.username || 'Anonymous';
+        }
+
+        const balanceSpan = document.getElementById('balance');
+        if (balanceSpan) {
+            balanceSpan.textContent = apiData.user.balance || '0';
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+fetchUserData();
