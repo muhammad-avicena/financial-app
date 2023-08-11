@@ -1,7 +1,7 @@
 // const localStorageData: any = localStorage.getItem('userData');
 // const dataUser: any = JSON.parse(localStorageData || '{}');
 
-const transactionsEndpoint = `https://financial-api.avicena.dev/api/transaction`;
+const transactionsEndpoint = `http://localhost:5001/api/transaction`;
 
 interface Transaction {
   transactionId: string;

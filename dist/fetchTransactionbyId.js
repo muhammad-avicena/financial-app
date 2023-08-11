@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const transactionsEndpoint = `https://financial-api.avicena.dev/api/transaction`;
+const transactionsEndpoint = `http://localhost:5001/api/transaction`;
 function fetchTransactionData() {
     return __awaiter(this, void 0, void 0, function* () {
         try {

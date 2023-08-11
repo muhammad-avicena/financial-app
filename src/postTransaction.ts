@@ -5,10 +5,9 @@ interface MyFormData {
   productPrice: number;
 }
 
-const localStorageData: string | null = localStorage.getItem("userData");
-const dataUser = JSON.parse(localStorageData || "{}");
-
 document.addEventListener("DOMContentLoaded", () => {
+  const localStorageData: string | null = localStorage.getItem("userData");
+  const dataUser = JSON.parse(localStorageData || "{}");
   const form = document.getElementById("transactionForm") as HTMLFormElement;
   const successSpan = document.getElementById(
     "transactionSuccess"
@@ -30,8 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
         (document.getElementById("productPrice") as HTMLInputElement).value
       ),
     };
+
+    console.log(formData);
     try {
-      const response = await fetch("https://financial-api.avicena.dev/api/transaction", {
+      const response = await fetch("http://localhost:5001/api/transaction", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Transaction created:", data);
         successSpan.textContent = "Transaction created successfully!";
         setTimeout(() => {
-            window.location.reload();
+          window.location.reload();
         }, 2000);
       } else {
         console.error("Error creating transaction:", response.statusText);

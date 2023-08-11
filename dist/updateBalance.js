@@ -1,4 +1,5 @@
 "use strict";
+// TypeScript code to update data using the fetch API
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -11,22 +12,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 document.addEventListener("DOMContentLoaded", () => {
     const localStorageData = localStorage.getItem("userData");
     const dataUser = JSON.parse(localStorageData || "{}");
-    const form = document.getElementById("transactionForm");
-    const successSpan = document.getElementById("transactionSuccess");
-    const failedSpan = document.getElementById("transactionFailed");
+    const { id } = dataUser;
+    const successSpan = document.getElementById("updateBalanceSuccess");
+    const form = document.getElementById("balanceForm");
     form.addEventListener("submit", (event) => __awaiter(void 0, void 0, void 0, function* () {
         event.preventDefault();
+        const balance = document.getElementById("updateBalanceUser").value;
         const formData = {
-            userId: dataUser.id,
-            productName: document.getElementById("productName")
-                .value,
-            productQuantity: parseInt(document.getElementById("productQuantity").value),
-            productPrice: parseInt(document.getElementById("productPrice").value),
+            balance: balance,
         };
         console.log(formData);
         try {
-            const response = yield fetch("http://localhost:5001/api/transaction", {
-                method: "POST",
+            const response = yield fetch(`http://localhost:5001/api/user/${id}`, {
+                method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -34,20 +32,18 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             if (response.ok) {
                 const data = yield response.json();
-                console.log("Transaction created:", data);
-                successSpan.textContent = "Transaction created successfully!";
+                console.log("Balance updated:", data);
+                successSpan.textContent = "Balance updated successfully!";
                 setTimeout(() => {
                     window.location.reload();
                 }, 2000);
             }
             else {
-                console.error("Error creating transaction:", response.statusText);
-                failedSpan.textContent = `Error creating transaction:, ${response.statusText}`;
+                console.error("Error updating balance:", response.statusText);
             }
         }
         catch (error) {
-            console.error("Error creating transaction:", error);
-            failedSpan.textContent = `Error creating transaction:, ${error}`;
+            console.error("Error updating balance:", error);
         }
     }));
 });

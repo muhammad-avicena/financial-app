@@ -13,13 +13,13 @@ function fetchUserData() {
         try {
             const localStorageData = localStorage.getItem('userData');
             const dataUser = JSON.parse(localStorageData || '{}');
-            const getUserById = `https://financial-api.avicena.dev/api/user/${dataUser.id}`;
+            const getUserById = `http://localhost:5001/api/user/${dataUser.id}`;
             const response = yield fetch(getUserById);
             const apiData = yield response.json();
             console.log(apiData);
             const userSpan = document.getElementById('user');
             if (userSpan) {
-                userSpan.textContent = apiData.user.username || 'Anonymous';
+                userSpan.textContent = apiData.user.username || 'Anon';
             }
             const balanceSpan = document.getElementById('balance');
             if (balanceSpan) {
