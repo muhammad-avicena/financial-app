@@ -3016,6 +3016,10 @@ video {
   content: var(--tw-content);
 }
 
+.\[a-zA-Z0-9\:\\\\-\\\\\._\$\] {
+  a-z-a--z0-9: \\-\\. $;
+}
+
 html, body {
   font-family: monospace;
   font-size: 1rem;
